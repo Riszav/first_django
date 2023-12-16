@@ -1,0 +1,74 @@
+{%  extends 'index.html' %}
+
+{% block content %}
+<style type="text/css">
+   .space {
+        padding: 30px; /* Поля */
+        background: #E5D3BD; /* Цвет фона */
+        {#border: 2px solid #E81E25; /* Параметры рамки */#}
+   }
+   .product {
+       padding-bottom: 25px;
+       width: 33%;
+   }
+   .truncate-text {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      {#line-height: 1.3em;#}
+      {#height: 3.9em;#}
+   }
+   .float{
+       float: left;
+       padding-right: 10%;
+   }
+
+  </style>
+<div class="row row-cols-1 row-cols-md-2 g-4, space">
+    {% for post in posts %}
+
+        <div class="col, product">
+           <div class="card">
+              <img src="{{ post.image }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h4 class="card-title">{{ post.title }}</h4>
+                  <p class="card-text, truncate-text">{{ post.text }}</p>
+                    <div>
+                      <h6 class="float">Оценка:{{ post.rate }}</h6>
+                        <h6>Стоимость{{ post.price }}$</h6>
+                    </div>
+                  <a href="#" class="button">Узнать больше</a>
+              </div>
+           </div>
+        </div>
+
+
+{#        <div class="card" id="grid" style="width: 18rem;">#}
+{#          <img src="{{ post.image }}" class="card-img-top" alt="Фото продукта">#}
+{#          <div class="card-body">#}
+{#            <h5 class="card-title" align="center">{{ post.title }}</h5>#}
+{#            <p class="card-text">{{ post.text }}</p>#}
+{#          </div>#}
+{#          <ul class="list-group list-group-flush">#}
+{#            <li class="list-group-item">Стоимость:{{ post.price }}$ Рейтинг:{{ post.rate }}</li>#}
+{#            <li class="list-group-item">Дата обновления:{{ post.updated_at }}</li>#}
+{#          </ul>#}
+{#          <div class="card-body">#}
+{#            <a href="#" class="card-link, ">Ссылка на товар</a>#}
+{#            <a href="#" class="card-link">Another link</a>#}
+{#          </div>#}
+{#        </div>#}
+
+
+{#        <img src="{{ post.image }}" alt="Фото продукта">#}
+{#        <h1>{{ post.title }}</h1>#}
+{#        <p>{{ post.text }}</p>#}
+{#        <p>{{ post.price }}$</p>#}
+{#        <p>{{ post.rate }}</p>#}
+{#        <p>{{ post.updated_at }}</p>#}
+
+    {% endfor %}
+
+</div>
+{% endblock %}
