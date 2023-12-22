@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from post.models import Product
+from post.models import Product, Category
 import datetime
 
 
@@ -29,3 +29,19 @@ def product_view(request):
         }
         return render(request, 'products/products.html', context=context)
 
+def category_view(request):
+    if request.method == 'GET':
+        # 1 - получить все хэштеги из базы данных
+        categories = Category.objects.all()
+
+        # 2 - передать хэштеги в шаблон
+        context = {
+            'categories': categories,
+        }
+
+        # 3 - вернуть ответ с шаблоном и данными
+        return render(
+            request, # запрос от пользователя (объект HttpRequest) параметр обязательный
+            'category/category.html',  # имя шаблона (строка) параметр обязательный
+            context=context # словарь с данными (dict) параметр необязательный
+        )

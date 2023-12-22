@@ -30,13 +30,14 @@
 
         <div class="col, product">
            <div class="card">
-              <img src="{{ post.image }}" class="card-img-top" alt="...">
+              <img src="{{ post.image }}"  class="card-img-top" alt="...">
               <div class="card-body">
                   <h4 class="card-title">{{ post.title }}</h4>
+                  <h6>{{ post.category }}</h6>
                   <p class="card-text, truncate-text">{{ post.text }}</p>
                     <div>
-                      <h6 class="float">Оценка:{{ post.rate }}</h6>
-                        <h6>Стоимость{{ post.price }}$</h6>
+                      <h6 class="float">Оценка: {{ post.rate }}</h6>
+                        <h6>Стоимость {{ post.price }}$</h6>
                     </div>
                   <a href="#" class="button">Узнать больше</a>
               </div>
