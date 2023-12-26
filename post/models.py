@@ -21,7 +21,7 @@ class Product(BaseModel):
         null=True,
         related_name="category" # Поле для обратной связи (по умолчанию appname_classname_set (post_postinfo_set))
     )
-    image = models.ImageField(upload_to='media/products', null=True, blank=True)
+    image = models.ImageField(upload_to='products', null=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.title} [{self.price}$]"
@@ -41,3 +41,20 @@ class Category(models.Model):
         db_table = 'category' # Название таблицы в базе данных (по умолчанию appname_classname (post_postinfo))
         verbose_name = 'Категория' # Название модели в единственном числе
         verbose_name_plural = 'Категории' # Название модели во множественном числе
+
+class Review(BaseModel):
+    post = models.ForeignKey(
+        "post.Product", # Поле для связи с другой моделью
+        on_delete=models.CASCADE, # Политика удаления записи в связанной модели (CASCADE - удалить все записи, которые связаны с этой записью)
+        verbose_name="Пост", # Название поля в форме (админка, форма регистрации, форма авторизации)
+        related_name="reviews" # Поле для обратной связи (по умолчанию appname_classname_set (post_comments_set))
+    )
+    text = models.TextField(null=True, blank=True, verbose_name="Текст") # Поле для ввода текста без ограничения
+
+    def __str__(self) -> str:
+        return f"{self.text}"
+
+    class Meta: # Мета класс - Это класс, который содержит дополнительную информацию о модели
+        db_table = 'reviews' # Название таблицы в базе данных (по умолчанию appname_classname (post_comments))
+        verbose_name = 'Отзыв' # Название модели в единственном числе
+        verbose_name_plural = 'Отзывы' # Название модели во множественном числе

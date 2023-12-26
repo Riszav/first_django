@@ -26,20 +26,20 @@
 
   </style>
 <div class="row row-cols-1 row-cols-md-2 g-4, space">
-    {% for post in posts %}
+    {% for product in products %}
 
         <div class="col, product">
            <div class="card">
-              <img src="{{ post.image }}"  class="card-img-top" alt="...">
+              <img src="/media/{{ product.image }}"  class="card-img-top" width="150px">
               <div class="card-body">
-                  <h4 class="card-title">{{ post.title }}</h4>
-                  <h6>{{ post.category }}</h6>
-                  <p class="card-text, truncate-text">{{ post.text }}</p>
+                  <h4 class="card-title">{{ product.title }}</h4>
+                  <h6>{{ product.category }}</h6>
+                  <p class="card-text, truncate-text">{{ product.text }}</p>
                     <div>
-                      <h6 class="float">Оценка: {{ post.rate }}</h6>
-                        <h6>Стоимость {{ post.price }}$</h6>
+                      <h6 class="float">Оценка: {{ product.rate }}</h6>
+                        <h6>Стоимость {{ product.price }}$</h6>
                     </div>
-                  <a href="#" class="button">Узнать больше</a>
+                  <a href="/products/{{ product.id }}" class="button">Узнать больше</a>
               </div>
            </div>
         </div>

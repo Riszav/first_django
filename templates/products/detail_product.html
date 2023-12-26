@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <style>
+    html, body{margin:0;padding:0;}
+    .main {
+    margin:0 auto; /* Центрируем блоки */
+    width:100%; /* Задаем ширину 100%, чтобы сделать ее резиновой */
+    max-width:1200px; /* Устанавливаем максимальную ширину */
+    }
+    .inline div{
+    display:inline-block; /* Делаем блоки по горизонтали */
+    display: -moz-inline-stack; /* Для FireFox 2, тот же самый, что и inline-block */
+    vertical-align:top; /* Выравниваем их сверху */
+    font-size:16px; /* Ставим дочкам размер шрифта, иначе примет значение родителя */
+    /* Для IE 6 и IE 7 чтобы блоки были по горизонтали*/
+    zoom: 1;
+    *display: inline;
+
+    }
+    div.inline{font-size:0;} /* Ставим родителю значение 0, чтобы убрать отступы у блоков*/
+    .left-block{
+    width:40%; /*Задаем ширину в процентах чтобы сделать ее резиновой*/
+    height: auto; /* Высота блока */
+        padding: 20px;
+    }
+    .right-block{
+    width:60%;
+    height:auto;
+    }
+    .review-block{
+        border-radius: 10px;
+        background-color: #f5dd5d;
+        padding: 10px;
+        margin: 20px;
+    }
+    .review-title{
+        text-align: center;
+        margin-top: 20px;
+    }
+    </style>
+
+
+    <div class="main inline">
+        <div class="left-block">
+            <img src="/media/{{ product.image }}" width="95%">
+        </div>
+
+        <div class="right-block">
+            <h1>{{ product.title }}</h1>
+            <h3>{{ product.category }}</h3>
+            <p>{{ product.text }}</p>
+            <h5>Оценка: {{ product.rate }}</h5>
+            <h5>Цена: {{ product.price }}$</h5>
+        </div>
+    </div>
+    <div class="main">
+    <H4 class="review-title">Отзывы</H4>
+    {% for review in product.reviews.all %}
+
+        <div class="review-block">
+            <h5>{{ review.created_at }}</h5>
+            <p>{{ review.text }}</p>
+        </div>
+
+    {% endfor %}
+    </div>
+{% endblock %}

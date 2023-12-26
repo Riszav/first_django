@@ -23,11 +23,24 @@ def main_view(request):
 
 def product_view(request):
     if request.method == 'GET':
-        posts = Product.objects.all()
+        products = Product.objects.all()
         context = {
-            'posts': posts
+            'products': products
         }
         return render(request, 'products/products.html', context=context)
+
+def product_detail_view(request, pk):
+    if request.method == 'GET':
+        try:
+            product = Product.objects.get(id=pk)
+        except Product.DoesNotExist:
+            return render(request, '404.html')
+        context = {
+            'product': product
+        }
+
+        return render(request, 'products/detail_product.html', context=context)
+
 
 def category_view(request):
     if request.method == 'GET':
