@@ -34,18 +34,22 @@ def product_detail_view(requests, pk):
     if requests.method == 'GET':
         try:
             product = Product.objects.get(id=pk)
-            review = Review.objects.all()
+            form = ReviewForm(requests.method)
+
         except Product.DoesNotExist:
             return render(requests, '404.html')
+
         context = {
             'product': product,
             'form': ReviewForm
         }
 
+
         return render(requests, 'products/detail_product.html', context=context)
     if requests.method == 'POST':  # создать пост
         # 1 - получить данные из запроса
         form = ReviewForm(requests.POST, requests.FILES)
+        product = Product.objects.get(id=pk)
 
         # 2 - валидация данных
         if form.is_valid():  # True если форма валидна, False если форма не валидна
@@ -54,8 +58,11 @@ def product_detail_view(requests, pk):
 
             # Если это Form, Post.objects.create(**form.cleaned_data)
             # Post.objects.create(**form.cleaned_data)
+            form = form.save(commit=False)
 
+            form.post = product
             # Если это ModelForm, form.save()
+
             form.save()
 
             return redirect('.')
