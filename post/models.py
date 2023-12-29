@@ -32,7 +32,7 @@ class Product(BaseModel):
         verbose_name_plural = 'Продукты'  # Название модели во множественном числе
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, verbose_name="Название")
+    name = models.CharField(max_length=255, verbose_name="Название", unique=True)
 
     def __str__(self) -> str:
         return f"{self.name}"

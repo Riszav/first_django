@@ -56,13 +56,29 @@
     </div>
     <div class="main">
     <H4 class="review-title">Отзывы</H4>
+
+
+    <h6>Добавьте свой отзыв</h6>
+    <form action="." method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>{{ form.post }}</p>
+        <p>{{ form.text }}</p>
+        <button type="submit">Добавить отзыв</button>
+    </form>
+
+
     {% for review in product.reviews.all %}
 
         <div class="review-block">
-            <h5>{{ review.created_at }}</h5>
+
+            <h5> {{ forloop.counter }}) {{ review.created_at }}</h5>
             <p>{{ review.text }}</p>
         </div>
 
+        {% empty %}
+    <p>There are no comments yet.</p>
+
     {% endfor %}
+
     </div>
 {% endblock %}
