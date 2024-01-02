@@ -1,0 +1,25 @@
+
+{% extends 'index.html' %}
+
+{% block content %}
+
+
+<h1>Данные пользователя: {{ user.username }}</h1>
+<h3>Дата регистрации: {{ user.date_joined }}</h3>
+<h3>Дата последней авторизации: {{ user.last_login }}</h3>
+<h4>
+Имя: {{ user.first_name }}<br>
+Фамилия: {{ user.last_name }}<br>
+Email: {{ user.email }}<br>
+</h4>
+
+    <button>
+        <a role="button" href="delete/">Удалить профиль</a>
+    </button>
+{#<form action="/register/" method="POST" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    <button type="submit">Зарегистрировать</button>#}
+{#</form>#}
+
+{% endblock %}
