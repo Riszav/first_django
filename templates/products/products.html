@@ -5,7 +5,7 @@
    .space {
         padding: 30px; /* Поля */
         background: #E5D3BD; /* Цвет фона */
-        {#border: 2px solid #E81E25; /* Параметры рамки */#}
+        {#justify-content: center;#}
    }
    .product {
        padding-bottom: 25px;
@@ -16,24 +16,73 @@
       display: -webkit-box;
       -webkit-line-clamp: 5;
       -webkit-box-orient: vertical;
-      {#line-height: 1.3em;#}
-      {#height: 3.9em;#}
+      line-height: 1.3em;
+      height: 3.9em;
    }
    .float{
        float: left;
        padding-right: 10%;
    }
+   .search {
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 30px;
+        {#justify-content: center;#}
+   }
 
+   a.button15 {
+  display: inline-block;
+  font-family: arial,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(68,68,68);
+  text-decoration: none;
+  user-select: none;
+  padding: .2em 1.2em;
+  margin-top: 5px;
+  outline: none;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
+  transition: all .218s ease 0s;
+}
+a.button15:hover {
+  color: rgb(24,24,24);
+  border: 1px solid rgb(198,198,198);
+  background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+a.button15:active {
+  color: rgb(51,51,51);
+  border: 1px solid rgb(204,204,204);
+  background: rgb(238,238,238) linear-gradient(rgb(238,238,238), rgb(224,224,224));
+  box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
+}
   </style>
-<div class="row row-cols-1 row-cols-md-2 g-4, space">
+
+    <div class="search">
+        <div>
+            <form action="" method="get">
+                <input type="text" name="search" placeholder="Search">
+                <input type="submit" value="Search">
+            </form>
+
+            <a class="button15" href="?order=date" methods="get">Cортировать по дате ↑</a>
+            <a href="?order=-date" class="button15" methods="get">Cортировать по дате ↓</a>
+            <a href="?order=title" class="button15" methods="get">Cортировать алфавитному порядку</a>
+            <a href="?order=_" class="button15" methods="get">Отменить сортировку</a>
+        </div>
+    </div>
+<div class="row row-cols-1 row-cols-md-2 g-4 space" >
     {% for product in products %}
 
-        <div class="col, product">
+        <div class="col product">
            <div class="card">
               <img src="/media/{{ product.image }}"  class="card-img-top" width="150px">
               <div class="card-body">
                   <h4 class="card-title">{{ product.title }}</h4>
                   <h6>{{ product.category }}</h6>
+                  <p class="card-text">{{ product.created_at }}</p>
                   <p class="card-text, truncate-text">{{ product.text }}</p>
                     <div>
                       <h6 class="float">Оценка: {{ product.rate }}</h6>
@@ -70,6 +119,13 @@
 {#        <p>{{ post.updated_at }}</p>#}
 
     {% endfor %}
+    <div class="btn-toolbar mb-3" style="width: 100%" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group me-2" role="group" aria-label="First group">
+        {% for page in max_pages %}
+            <a type="button" class="btn btn-outline-secondary" href="?page={{ page }}" methods="GET">{{ page }}</a>
+        {% endfor %}
+      </div>
+    </div>
 
 </div>
 {% endblock %}
